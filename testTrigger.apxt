@@ -1,0 +1,13 @@
+trigger testTrigger on orgObj__c (before update) {
+    for (orgObj__c i : Trigger.new)
+    {
+        orgObj__c old = Trigger.oldMap.get(i.Id);
+        if (old.Update__c == false && i.Update__c == true)
+        {
+            i.Description__c = i.Country__c+', '+
+            	i.City__c+', '+
+            	i.Index__c+', '+
+            	i.Street__c;
+        }
+    }
+}
