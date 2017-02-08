@@ -1,0 +1,22 @@
+<apex:page controller="myControl">
+    <apex:form >
+        <apex:pageBlock title="Выбор организации">
+            <apex:selectList value="{!org}" size="1" multiselect="false">
+                <apex:selectOptions value="{!orgSelectList}"/>
+                <apex:actionSupport event="onchange"
+                                    action="{!table}"
+                                    rerender="formWtable"/>
+            </apex:selectList>
+        </apex:pageBlock>
+    </apex:form>
+    <apex:form id="formWtable">
+    	<apex:pageBlock >
+            <apex:pageBlockTable value="{!ppl}" var="p" rendered="true">
+                <apex:column value="{!p.Surname__c}"/>
+                <apex:column value="{!p.Position__c}"/>
+                <apex:column value="{!p.Phone__c}"/>
+                <apex:column value="{!p.Email__c}"/>
+            </apex:pageBlockTable>
+	    </apex:pageBlock>
+    </apex:form>
+</apex:page>

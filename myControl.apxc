@@ -1,0 +1,26 @@
+public class myControl {
+    public String org {get;set;}
+    public List<People__c> ppl{get;set;}
+    
+    public myControl()
+    {
+        ppl = [SELECT Position__c, Surname__c, Phone__c, Email__c FROM People__c];
+    }
+    public List<SelectOption> getOrgSelectList()
+    {
+        List<SelectOption> res = new List<SelectOption>();
+        List<orgObj__c> tmp = [SELECT Name from orgObj__c];
+        for (orgObj__c i : tmp)
+        {
+            res.add(new SelectOption(i.Name,i.Name));
+        }
+        return res;
+    }
+    public PageReference table()
+    {
+        ppl = [SELECT Position__c, Surname__c, Phone__c, Email__c
+               FROM People__c
+              WHERE org__r.Name = :org];
+        return null;
+    }
+}
